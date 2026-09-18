@@ -1,0 +1,4 @@
+interface:
+  display_name: "OpenCode 开发交接计划"
+  short_description: "把业务约束写成接口契约、可执行验收和并行交付边界，减少开发返工"
+  default_prompt: "使用 $opencode-handoff-plans，为交给 OpenCode 开发、由 Codex 验收的需求编写或复核实施计划。"
