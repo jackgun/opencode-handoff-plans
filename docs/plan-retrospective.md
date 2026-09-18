@@ -63,3 +63,20 @@ an isolated database concurrency test.
 ## Measuring improvement
 
 For comparable deliveries, record the first acceptance result, number of repair rounds, defects caused by missing plan detail, defects hidden by mocks, and unverified dependencies reported honestly. Test-count growth alone is not a useful quality metric.
+
+## Production wiring is a separate acceptance obligation
+
+An implementation can contain correct domain helpers, tables, routes, and unit tests while still being unreachable to its intended user. This happens when a plan treats components as the delivery unit instead of treating the complete production path as the delivery unit.
+
+Before implementation, trace each material rule through this ledger:
+
+```text
+external trigger → registered entry → domain service → transaction record/outbox
+→ registered consumer → observable result → entry-level test → external evidence status
+```
+
+The concrete registration point matters. A skill needs a discoverable manifest and handler; an HTTP action needs a mounted router and trusted principal; an asynchronous operation needs both a producer and a registered consumer. A helper that is only called from tests, an outbox without a drain, or a callback format without a consumer is not an integrated feature.
+
+The same rule applies to security and operational behavior. An administrator principal does not establish an ordinary employee identity; a user ID supplied by a request does not establish authorization. A retained-media API does not establish media persistence until the real intake calls it and writes the retained object reference. A deadline scanner does not establish SLA behavior until the production assignment path writes the deadline and current processing round.
+
+For every path that writes data, changes state, or sends a message, acceptance should include one successful entry-level scenario and one failed, stale, duplicate, or unauthorized scenario that proves the relevant write, send, or retention call did not happen. Use an isolated real database for races and constraints. A controlled sender can replace network I/O in local tests, but actual platform delivery and callbacks remain a separately reported external evidence layer.
