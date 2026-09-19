@@ -5,6 +5,7 @@ Source-available Codex skill and reusable templates for planning, handing off, a
 ## What is included
 
 - `skills/opencode-handoff-plans/` — installable Codex skill for writing and reviewing implementation plans handed to coding agents.
+- `skills/opencode-handoff-plans/references/exact-handoff.md` — exact-execution plans, reproducible patch steps, environment boundaries, and deviation reports.
 - `docs/plan-retrospective.md` — lessons from a real multi-agent delivery and acceptance cycle.
 - `docs/task-template.md` — compact task and verification template.
 
