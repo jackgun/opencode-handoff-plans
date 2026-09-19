@@ -4,6 +4,12 @@ All notable changes to this project are documented here.
 
 ## Unreleased
 
+## 0.3.0 — 2026-09-19
+
+- Added timeout-race and reply-ownership planning guidance: a named final-response owner, explicit CAS `true`/`false`/error handling, fail-closed queued promises, and atomic worker result registration.
+- Required plans to preserve the deterministic barriers and original interleavings of known race reproductions when turning XFAIL tests green; a store-only CAS test is no longer evidence for an API-to-worker delivery path.
+- Added reusable task-card scenarios for outer timeouts, late worker completion, ownership conflicts, bounded retry, dead-letter handling, and controlled-sender verification.
+
 ## 0.2.0 — 2026-09-19
 
 - Added acceptance guidance and reusable task scenarios for host-mediated free-text menu input, including the distinction between `text_selection` and a chosen “other” option.
