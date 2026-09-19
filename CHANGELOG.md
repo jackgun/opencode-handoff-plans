@@ -4,6 +4,8 @@ All notable changes to this project are documented here.
 
 ## Unreleased
 
+## 0.2.0 — 2026-09-19
+
 - Added acceptance guidance and reusable task scenarios for host-mediated free-text menu input, including the distinction between `text_selection` and a chosen “other” option.
 - Added configuration-lifecycle checks for disabled, re-enabled, and deleted notification targets across both enqueue and delivery paths.
 
