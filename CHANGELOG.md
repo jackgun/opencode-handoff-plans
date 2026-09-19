@@ -4,6 +4,12 @@ All notable changes to this project are documented here.
 
 ## Unreleased
 
+## 0.4.0 — 2026-09-20
+
+- Added ownership-chain guidance for reservation, invocation binding, enqueueing, result registration, and outbox delivery; an empty or failed binding now requires rollback and a retryable response before any queued promise.
+- Distinguished a diagnosable `failed + output + audit` record from recoverable delivery, and required a registered retry, scanner, or human consumer before claiming recovery.
+- Extended the timeout-reply task scenarios with binding failure tests that assert zero queued jobs, zero customer promise, and no fallback to an incompatible legacy protocol.
+
 ## 0.3.0 — 2026-09-19
 
 - Added timeout-race and reply-ownership planning guidance: a named final-response owner, explicit CAS `true`/`false`/error handling, fail-closed queued promises, and atomic worker result registration.
