@@ -4,6 +4,9 @@ All notable changes to this project are documented here.
 
 ## Unreleased
 
+- Added acceptance guidance and reusable task scenarios for host-mediated free-text menu input, including the distinction between `text_selection` and a chosen “other” option.
+- Added configuration-lifecycle checks for disabled, re-enabled, and deleted notification targets across both enqueue and delivery paths.
+
 - Added an exact-execution handoff mode with complete file contents, unique search-and-replace anchors, sequential rehearsal, environment contracts, and explicit deviation boundaries.
 - Distinguished expected results from observed evidence and assigned ownership for excluded or unavailable verification.
 

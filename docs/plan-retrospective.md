@@ -28,6 +28,8 @@ Several requirements were written as correct intentions but did not define an ex
 | Handoff is honest | A state flag and success-sounding reply had no host action | Test producer output, host consumption, and the actual user-visible confirmation separately |
 | Cancellation has no inventory dependency | The code allowed cancellation after a failed fetch but still called the fetch | Make the fetch fail if called and assert that cancellation still succeeds |
 | Generated menus mean what they display | Adjacent price bands overlapped or could not be consumed | Send every generated option through the real parser and filter; test each boundary and minimum currency unit |
+| Customers can choose or type another value | The host injected a free-text selection with an empty value; the state machine advanced and persisted an empty field | Start from the real continuation preparation path, submit free text without selecting “other”, and assert the persisted field contains that text |
+| Only enabled notification targets receive events | The page hid disabled targets, but old routing rules still produced and delivered notifications | Disable a target after it has a rule; assert both the producer and sender suppress it, then define and test re-enable and delete behavior |
 
 ## Better task cards
 
@@ -59,6 +61,8 @@ an isolated database concurrency test.
 6. State exactly what must not happen in cancellation, authorization, duplicate, and stale-event paths, then assert the call is absent.
 7. Use safe degradation as a deliverable only for the degradation behavior. It does not complete the unavailable upstream business rule.
 8. Review fixed defects by semantic category, not only by the literal failing input. For example, test range, direction, precision, ambiguity, and question forms together when changing a money parser.
+9. For stateful conversations, test the protocol translation as well as the state machine. A hand-built selection can match the domain function while differing from the selection and text that the host actually injects.
+10. Treat configuration as a lifecycle. A UI filter proves only the current screen; rules and queued work created before disablement must be tested at the producer and consumer boundaries.
 
 ## Measuring improvement
 
