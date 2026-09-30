@@ -4,6 +4,11 @@ All notable changes to this project are documented here.
 
 ## Unreleased
 
+## 0.5.1 — 2026-09-30
+
+- Scoped `references/parallel-waves.md` to plan and handoff content: removed the acceptor's wave report, the self-review labeling rule, and the unverified per-lane merge flow; these remain in the retrospective as acceptor-side practices and watch items.
+- Named the superpowers task-brief and ledger scripts explicitly in the task-heading guidance (`### Task N:`).
+
 ## 0.5.0 — 2026-09-30
 
 - Added `references/parallel-waves.md` for multi-lane, multi-wave handoffs: an acceptor-owned contract wave that is tagged before lanes start, a separate plan-sync commit for contract-wave rulings and known consumer constraints before dispatch, fixed serialization semantics, the host's real validator run during the contract wave, a single opening-prompt template with per-lane task and design-section tables, and an acceptor checklist.

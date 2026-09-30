@@ -125,6 +125,10 @@ The following problems occurred during the contract wave and were handled before
 
 The handoff document that worked had one opening-prompt template with placeholders plus a per-lane task table, a lane-to-design-section map, a read-only list of reference implementations, red lines that named adjacent dangerous targets, and an acceptor checklist that executors could run in advance. It stated at the top that the acceptor would rerun everything rather than rely on the report.
 
+### Acceptor-side practices
+
+These concern how the acceptor runs the waves rather than what the plan tells the executor, so they are kept here instead of in the skill. After a wave, the acceptor reported to the user: every ruling with the cost of getting it wrong, deferred minors and whether each became a consumer constraint, environment changes (services created, started, or stopped; stopped rather than deleted, and only with the user's authorization), and the next wave's worktree, branch, and task table for each lane. When only the author reviewed the wave, the report said so.
+
 ### Watch items (not yet verified)
 
 These practices are in the plan but have not yet run through a later wave. Treat them as recommendations until there is evidence:
