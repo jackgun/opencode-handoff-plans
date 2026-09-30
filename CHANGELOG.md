@@ -4,6 +4,9 @@ All notable changes to this project are documented here.
 
 ## Unreleased
 
+- Extended `references/plan-self-check.md` with rows for source-set coverage in grounding validators, every exit of isolation and filtering rules with a control group, resume and retry semantics per intermediate state, round-trip fixtures that cover every contract value type, and model message sequences and input encoding. Added grounding variants and counterexamples for exemption rules.
+- Extended the cross-lane contract-wave rule to shared decision logic (validators, normalizers, formatters), and required traceability tests to assert at the exit where a rule takes effect.
+
 - Extended `references/plan-self-check.md` for computing components: a per-task null-rule table, "missing is not zero" review items assigned to every consumer of the data, behavior for keys outside closed lookup tables, the meaning of "not in the list" for truncated inputs, and host validate-and-generate runs in every task that produces host-consumed configuration.
 - Required golden values to be recomputed by script from source data with their formula and inputs, a named test for every calculation rule, and literal right-hand sides in golden assertions; replacing a literal with a recomputation by the same formula is now a red line.
 - Added a self-check that every produced data item has a consumer, examples for signature inputs and design narrowing, and a contract round-trip probe for computing components.

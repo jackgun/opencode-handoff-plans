@@ -190,3 +190,21 @@ The report lane had eleven findings. Eight were plan gaps, and some of these ove
 The plan also did not mention that the HTML renderer fetches external URLs and `file://` resources referenced in its input by default. Because model output reaches that renderer, the plan should have stated the allowed resources and required a test.
 
 The three pure execution deviations were specific to their code and are not turned into general rules. They went into the rework order.
+
+## An engine lane: named tests existed, rules still failed at the exits
+
+The execution-engine lane (planner, graph executor, model nodes, number grounding, node-result persistence) reported 128 passing tests, and every rule named in its report had a matching test. Probes with real data still found these defects:
+
+| Requirement | Defect found by probe | Root cause |
+| --- | --- | --- |
+| Node results persist | Saving crashed on the first real result because nested values held decimals; the test had stored one scalar decimal | Both: the plan said "encode with the contract" but named a scalar-only test; the executor did not encode through the contract |
+| Resume reuses finished work | Re-saving a failed node on resume hit a primary-key conflict | Plan gap: only the happy path of resume was specified, not failed, skipped, or degraded nodes, and not upsert versus insert |
+| Node status is recorded per node | On resume, every node's status was recorded under the last node's name | Execution deviation: a late-binding closure |
+| Sensitive items are isolated | Filtering applied only to an intermediate read view; the final result still carried sensitive items and internal keys | Plan gap: the plan named the intermediate view, not every exit |
+| Model output is grounded in its input | Numbers from structured findings in the input were not collected, so downstream model nodes that cited them were flagged and degraded | Plan gap: the source set listed scalars, strings, and by-year values, not structured objects |
+| Grounding catches invented numbers | Negative percentages were flagged; Chinese numerals and invented numbers in JSON fields passed | Plan gap: variants were incomplete, and the year exemption had no counterexample |
+| Retries converse correctly | The retry did not send the model's previous answer back | Both: the plan did not specify the message sequence |
+| Model input is readable | The input was a runtime repr string with non-ASCII text escaped | Both: the plan said "JSON string" without the encoder, character set, or field order; the executor used a default string conversion |
+| One regulation-reference check | Two parallel lanes each implemented the same check with different normalization | Plan gap: shared decision logic was not assigned to the contract wave or to one owning lane |
+
+The acceptance observation that generalizes: a rule-to-test trace is not satisfied because a named test exists and passes. The isolation test asserted only the intermediate view, so the rule held where it was tested and failed where it mattered. Traces must name the exit at which each rule takes effect.
