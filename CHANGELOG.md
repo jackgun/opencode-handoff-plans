@@ -4,6 +4,10 @@ All notable changes to this project are documented here.
 
 ## Unreleased
 
+- Extended `references/plan-self-check.md` for computing components: a per-task null-rule table, "missing is not zero" review items assigned to every consumer of the data, behavior for keys outside closed lookup tables, the meaning of "not in the list" for truncated inputs, and host validate-and-generate runs in every task that produces host-consumed configuration.
+- Required golden values to be recomputed by script from source data with their formula and inputs, a named test for every calculation rule, and literal right-hand sides in golden assertions; replacing a literal with a recomputation by the same formula is now a red line.
+- Added a self-check that every produced data item has a consumer, examples for signature inputs and design narrowing, and a contract round-trip probe for computing components.
+
 ## 0.6.0 — 2026-09-30
 
 - Added `references/plan-self-check.md`. For each rule that writes data or changes state, plans now derive and specify tests for: preconditions built through the production path, dedup keys for repeatedly triggered entries, check-then-write rules treated as races (lock or CAS, rowcount, two connections with a barrier), the valid range of id references, cache and completion markers written only after commit, non-trivial fixtures when data comes from a later lane, and error details that the downstream consumer needs.

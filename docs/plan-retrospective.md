@@ -158,3 +158,29 @@ In the first parallel wave, one lane delivered three tasks. The acceptor reran t
 | The plan is internally consistent | The plan said "load eight items"; its own list had seven | No self-check of totals | Totals checked against itemized lists before handoff |
 
 Classifying each defect as a plan gap or an execution deviation decided where the fix belonged. Plan gaps went back into the plan and into this skill. Execution deviations went into a rework order (X-R1 … X-Rn, each with the problem, the required change down to the function and SQL condition, and the named test and assertion), which opened with red lines: build preconditions through the real flow, make one commit, and report red/green evidence for each item.
+
+## Computing components and a report lane: what a single golden sample hides
+
+Two more lanes of the same wave failed first acceptance.
+
+The computing lane delivered thirteen pure functions, each with one golden-sample test, and all passed. A contract round-trip probe found the defects within minutes. The probe encodes each output with the shared contract's types, decodes it again as the execution engine does, and then feeds each function None, zero, an out-of-table key, and an empty list.
+
+| Requirement | Defect found by probe | Plan gap | Better plan evidence |
+| --- | --- | --- | --- |
+| Missing is not zero | A None cell (a dash in the source, meaning unknown) was treated as 0; derived amounts owed, late fees, and penalties were invented from it | The Review Focus item was assigned only to the parser and executor, which produce the data, not to the functions that consume it | A null-rule table on every computing task card, with one test per row |
+| Aggregates tolerate missing data | A summing function crashed on None | Same | Same |
+| Lookups are closed | A name outside the rate table raised an unhandled `KeyError` | No behavior for out-of-table keys | Stated behavior (skip, flag for review, or error) and an out-of-table test |
+| Top-N lists are partial | A category absent from a top-N list was treated as amount 0 | No semantics for "not in the list" | Stated meaning for truncated inputs and a test with an absent item |
+| Golden values are correct | The plan's hand-computed golden value was off in the last digit | The golden value was not recomputed from source | Script-recomputed golden values with formula and inputs written next to them |
+| Rules are tested | Rate bands, skip conditions, name normalization, and remarks had no tests | The task card listed only golden-sample assertions | A named test for every calculation rule |
+
+The executor reported the wrong golden value as a deviation, which was correct. But the executor also rewrote the assertion to recompute the value with the same formula, which made the test always pass. That was an execution deviation, and it is now a red line: keep the literal assertion and report the disagreement.
+
+The report lane had eleven findings. Seven were execution deviations. Examples: a money pattern matched only whole-cell numbers, a document-number check compared only the part after a bracket, empty disclaimer text was skipped silently, and a finding rendered without its evidence. Four were plan gaps:
+
+- The plan did not require running the host's tool to validate and generate the deployment composition in that task. The produced compose file used directives and unpinned images that the host forbids, and this surfaced only at acceptance.
+- The assembly function had to attribute an unfinished section to the node that produces its data, but its signature had no data-item-to-producer mapping. The implementation guessed and attached another node's failure to the section.
+- The design required a generation-time footer, a watermark for the free tier, and branding. The plan's rendering task omitted all three without saying so.
+- A model-backed skill ran and produced data that no report section displayed, spending model calls for nothing.
+
+The seven execution deviations were specific to their code and are not turned into general rules. They went into the rework order.
