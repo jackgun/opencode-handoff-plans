@@ -4,6 +4,8 @@ All notable changes to this project are documented here.
 
 ## Unreleased
 
+## 0.5.0 — 2026-09-30
+
 - Added `references/parallel-waves.md` for multi-lane, multi-wave handoffs: an acceptor-owned contract wave that is tagged before lanes start, a separate plan-sync commit for contract-wave rulings and known consumer constraints before dispatch, fixed serialization semantics, the host's real validator run during the contract wave, a single opening-prompt template with per-lane task and design-section tables, and an acceptor checklist.
 - Required guard tests to be shown red with an injected violation, added resource exhaustion from allow-listed constructs to evaluator review focus, and required `self-review` to be labeled as weaker than independent review.
 - Extended the exact-handoff environment table with pre-handoff measurement and adjacent dangerous targets; added same-line environment variables with a zero-skip gate for real-database tests, Windows line-ending and heredoc guidance, and task-heading compatibility with executor scripts.
