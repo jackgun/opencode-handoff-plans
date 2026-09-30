@@ -4,6 +4,13 @@ All notable changes to this project are documented here.
 
 ## Unreleased
 
+- Added `references/parallel-waves.md` for multi-lane, multi-wave handoffs: an acceptor-owned contract wave that is tagged before lanes start, a separate plan-sync commit for contract-wave rulings and known consumer constraints before dispatch, fixed serialization semantics, the host's real validator run during the contract wave, a single opening-prompt template with per-lane task and design-section tables, and an acceptor checklist.
+- Required guard tests to be shown red with an injected violation, added resource exhaustion from allow-listed constructs to evaluator review focus, and required `self-review` to be labeled as weaker than independent review.
+- Extended the exact-handoff environment table with pre-handoff measurement and adjacent dangerous targets; added same-line environment variables with a zero-skip gate for real-database tests, Windows line-ending and heredoc guidance, and task-heading compatibility with executor scripts.
+- Added reusable red lines (dependencies, containers, read-only repositories, real sends and models, golden values, sample-free model prompts, push and deploy) and report slots for red/green excerpts, checked items, and manual evidence.
+- Made the skill description and default prompt independent of the reviewer's identity.
+- Recorded the unverified per-lane merge and wave-advance practice as a retrospective watch item rather than a rule.
+
 ## 0.4.0 — 2026-09-20
 
 - Added ownership-chain guidance for reservation, invocation binding, enqueueing, result registration, and outbox delivery; an empty or failed binding now requires rollback and a retryable response before any queued promise.

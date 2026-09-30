@@ -102,3 +102,35 @@ The ownership record still needs to be associated with the invocation that will 
 Plans must therefore model reservation, binding, enqueueing, result registration, and delivery as one chain. Before an asynchronous job is accepted, binding must succeed; an empty result and an exception both terminate the request through the defined retryable failure path and roll back records in the same transaction where possible. The corresponding entry-level tests force each failure, then assert no job was queued, no queued promise was returned, and no legacy marker was used for a protocol whose worker does not consume it.
 
 An audit record, even one that preserves the completed output, is not a recovery mechanism. It becomes a valid degraded outcome only when a specific registered scanner, retry queue, or human operational workflow consumes it and that consumer has its own evidence. Acceptance reports should describe it as detected loss until then.
+
+## Parallel waves: a frozen contract is only useful if the plan says what was frozen
+
+A later delivery split the plan into waves. The acceptor completed a serial contract wave (skeleton, shared types, schema migration, expression evaluator), tagged it, and created one worktree and branch per parallel lane from that tag. Executors were told not to create worktrees, switch branches, or merge other lanes. The contract wave itself went well; most of the lessons concern what had to happen between finishing it and handing out the next wave.
+
+The following problems occurred during the contract wave and were handled before dispatch:
+
+| Requirement | Problem encountered | Better acceptance evidence |
+| --- | --- | --- |
+| Parallel lanes start from the current contract | Rulings made while executing the contract wave (a field left for a later task to append, string-only year keys in a mapping, a required per-entry field in the host deployment manifest) lived only in the execution ledger | A separate plan-sync commit that writes each ruling into the plan, the tag moved to it, and every lane worktree fast-forwarded before the opening prompt is sent |
+| Encoded values round-trip exactly | Table encoding silently dropped undeclared columns and tuples came back as lists, contradicting the stated round-trip rule; both were recorded only as deferred minors in the ledger | Known deviations written into the plan's contract section as consumer constraints, or fixed before tagging |
+| The planned test environment exists | The planned database container had been stopped for weeks, its port was now owned by another local stack, and the credentials no longer matched | Every row of the environment table re-tested before handoff; a dedicated test service on its own port; the adjacent port named as a forbidden target in the red lines |
+| The plugin manifest is valid | The host's real validator required a field the plan did not list | The host validator run during the contract wave with a temporary file, which is then removed and the read-only repository's `git status --porcelain` shown empty |
+| Source files pass the host's static scan | The scan matched forbidden words literally, including inside comments | A plan note that comments and docstrings in scanned files must also avoid forbidden words |
+| Real-database tests ran | Environment variables set in an earlier tool call did not reach the test process, because tool calls do not share shell state; a skipped suite looks green | Variables written on the same command line as the test runner, and zero skips as a delivery gate |
+| Byte-level golden files are stable | Line-ending conversion and heredoc quoting on Windows can alter bytes | `core.autocrlf false` (or `.gitattributes`) for such repositories, and multi-line content written with a file tool rather than a heredoc |
+| The executor's tooling can find tasks | Custom task headings were not recognized by the task-brief script, so the ledger had to be maintained by hand | Headings in the script's format, or a handoff note that the ledger is manual and what each row contains |
+| Guard tests protect the plugin protocol | A guard that never fails proves nothing | Each guard shown red with an injected violation, then green after removal |
+| A user-editable expression evaluator is safe | Every AST node was on the allow-list, yet string multiplication chained with `len()` could exhaust memory | Operand-type restrictions, a Review Focus item for resource exhaustion from allowed constructs, and a reproducing test seen red before the fix |
+| The wave was reviewed | Without authorization for a second reviewer, only the author reviewed the wave | The ledger records `self-review`, and the report to the user says it is weaker than independent review so the user can decide |
+
+The handoff document that worked had one opening-prompt template with placeholders plus a per-lane task table, a lane-to-design-section map, a read-only list of reference implementations, red lines that named adjacent dangerous targets, and an acceptor checklist that executors could run in advance. It stated at the top that the acceptor would rerun everything rather than rely on the report.
+
+### Watch items (not yet verified)
+
+These practices are in the plan but have not yet run through a later wave. Treat them as recommendations until there is evidence:
+
+- The acceptor reruns each lane's tests, walks the checklist, and merges the lane into the main branch.
+- Worktrees for the next wave are created only after every lane of the previous wave has merged.
+- Whether merge order and acceptor-side conflict resolution keep lanes from receiving an outdated contract.
+
+Record for each wave: whether any lane received an outdated contract, how many merge conflicts touched shared-contract files, and whether the acceptor's rerun found failures that the lane report did not show.

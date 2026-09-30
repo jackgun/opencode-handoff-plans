@@ -16,7 +16,7 @@ The skill helps a team trace each important rule from its specification through 
 Copy `skills/opencode-handoff-plans` into your Codex skills directory, or install it from this repository using your usual Codex skill workflow. Then invoke:
 
 ```text
-Use $opencode-handoff-plans to write an implementation plan for OpenCode and an acceptance plan for Codex.
+Use $opencode-handoff-plans to write an implementation plan for OpenCode and an acceptance plan for the independent reviewer (an agent or a person).
 ```
 
 ## License
