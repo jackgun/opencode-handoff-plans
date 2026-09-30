@@ -4,6 +4,8 @@ All notable changes to this project are documented here.
 
 ## Unreleased
 
+## 0.6.0 — 2026-09-30
+
 - Added `references/plan-self-check.md`. For each rule that writes data or changes state, plans now derive and specify tests for: preconditions built through the production path, dedup keys for repeatedly triggered entries, check-then-write rules treated as races (lock or CAS, rowcount, two connections with a barrier), the valid range of id references, cache and completion markers written only after commit, non-trivial fixtures when data comes from a later lane, and error details that the downstream consumer needs.
 - Added plan self-checks: every rule computable from the task's signature, design narrowing stated with a reason, host interface parameters honored, commit responsibility consistent, totals matching itemized lists, and cross-lane types defined in the contract wave.
 - Added probe acceptance, classification of defects as plan gaps or execution deviations, and a rework-order format.
