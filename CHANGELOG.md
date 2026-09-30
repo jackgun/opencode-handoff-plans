@@ -7,6 +7,7 @@ All notable changes to this project are documented here.
 - Extended `references/plan-self-check.md` for computing components: a per-task null-rule table, "missing is not zero" review items assigned to every consumer of the data, behavior for keys outside closed lookup tables, the meaning of "not in the list" for truncated inputs, and host validate-and-generate runs in every task that produces host-consumed configuration.
 - Required golden values to be recomputed by script from source data with their formula and inputs, a named test for every calculation rule, and literal right-hand sides in golden assertions; replacing a literal with a recomputation by the same formula is now a red line.
 - Added a self-check that every produced data item has a consumer, examples for signature inputs and design narrowing, and a contract round-trip probe for computing components.
+- Added plan requirements for filter and validation rules (a named adversarial sample set covering sibling rules), fail-closed handling of required compliance content, a field-destination table for serialization and rendering, and a resource-access boundary when servers parse or render untrusted content. Extended the totals self-check to require named test expectations that agree with the card's rules and defaults.
 
 ## 0.6.0 — 2026-09-30
 

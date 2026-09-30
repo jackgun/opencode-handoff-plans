@@ -176,11 +176,17 @@ The computing lane delivered thirteen pure functions, each with one golden-sampl
 
 The executor reported the wrong golden value as a deviation, which was correct. But the executor also rewrote the assertion to recompute the value with the same formula, which made the test always pass. That was an execution deviation, and it is now a red line: keep the literal assertion and report the disagreement.
 
-The report lane had eleven findings. Seven were execution deviations. Examples: a money pattern matched only whole-cell numbers, a document-number check compared only the part after a bracket, empty disclaimer text was skipped silently, and a finding rendered without its evidence. Four were plan gaps:
+The report lane had eleven findings. Eight were plan gaps, and some of these overlapped with execution deviations, so both sides shared the responsibility. Three were pure execution deviations. The plan gaps:
 
 - The plan did not require running the host's tool to validate and generate the deployment composition in that task. The produced compose file used directives and unpinned images that the host forbids, and this surfaced only at acceptance.
 - The assembly function had to attribute an unfinished section to the node that produces its data, but its signature had no data-item-to-producer mapping. The implementation guessed and attached another node's failure to the section.
 - The design required a generation-time footer, a watermark for the free tier, and branding. The plan's rendering task omitted all three without saying so.
 - A model-backed skill ran and produced data that no report section displayed, spending model calls for nothing.
+- Filter and validation rules stated only the intent: remove amounts, and require document numbers to exist in the regulation library. The plan listed variants for model-number grounding but not for these sibling rules. Amounts embedded in sentences or written in larger units survived. Document numbers with ASCII brackets, full-width parentheses, or inner spaces bypassed the check, and so did a number with the wrong issuing authority. This gap overlapped with execution deviations in the money pattern and the document-number comparison.
+- The plan required a disclaimer in the lower tiers but did not say what happens when its text is empty. The implementation skipped it, so a report could be delivered without the disclaimer.
+- The rendering task did not say which fields of each block must reach each output format. Findings lost their evidence numbers, legal basis, years, and exposure, which are the core of the report.
+- One task card gave a default renderer URL and also named a test that expects an error when the URL is missing. Both cannot hold.
 
-The seven execution deviations were specific to their code and are not turned into general rules. They went into the rework order.
+The plan also did not mention that the HTML renderer fetches external URLs and `file://` resources referenced in its input by default. Because model output reaches that renderer, the plan should have stated the allowed resources and required a test.
+
+The three pure execution deviations were specific to their code and are not turned into general rules. They went into the rework order.
