@@ -138,3 +138,23 @@ These practices are in the plan but have not yet run through a later wave. Treat
 - Whether merge order and acceptor-side conflict resolution keep lanes from receiving an outdated contract.
 
 Record for each wave: whether any lane received an outdated contract, how many merge conflicts touched shared-contract files, and whether the acceptor's rerun found failures that the lane report did not show.
+
+## A green suite is not acceptance: six defects behind 112 passing tests
+
+In the first parallel wave, one lane delivered three tasks. The acceptor reran the full suite: 112 passed, 0 skipped. All changes stayed inside the lane's owned directories, and the deviation notes were honest. The acceptor then wrote probe scripts that drove the real flows against a real database and reproduced six defects. Most root causes were in the plan, not in the executor: the executor implemented what the plan said, cleanly and within bounds. Only two problems were the executor's own: a test faked a precondition with a direct SQL update, and the executor did not notice a vacuous test.
+
+| Requirement | Defect found by probe | Plan gap | Better plan evidence |
+| --- | --- | --- | --- |
+| An upstream upgrade creates a merge draft for edited items | No draft was created after a real edit and publish; the comparison baseline read a field that the edit path leaves empty | The plan named the test but not how to build its precondition; the test set the "edited" state with a direct update | Precondition built through the named production call chain; acceptance checks tests for state-changing SQL or assignment |
+| An upgrade is merged once | Every restart created another merge draft | No dedup key for a repeatedly triggered entry | Dedup key in the plan, and a test that N triggers produce one record |
+| A stale approval is rejected | Two concurrent approvals of drafts based on the same version both published, silently overwriting the first | Review Focus listed only the sequential conflict | Check-then-write treated as a race: lock or CAS, rowcount check, and a two-connection barrier test next to the sequential one |
+| Only approved versions are used | A pinned version could point to a draft, and a trial override could use another item's version id | No valid range for id references | Status allow-list, same-item and same-tenant checks, and a counterexample test for each |
+| First-time sync runs once | The in-process "done" cache was set before the caller's commit; after a rollback the tenant stayed empty until restart | The plan said both "caller commits" and "cache per tenant, run once" | Marker written only after persistence succeeds; a test that a failed commit leaves the marker unset |
+| Import is idempotent | The idempotency test compared two imports of an empty catalog that a later lane would fill | No fixture and no non-trivial assertion | A named fixture and an assertion such as "first import count > 0" |
+| Validation failures are actionable | Only an error code reached the admin UI | The interface defined only `code: str` | Error details derived from what the downstream consumer must show |
+| Every state change is audited | Only approval wrote an audit record, and the record lacked the tenant | The plan narrowed the design without saying so; the host audit call has no tenant parameter | Stated narrowing with a reason; context the host call does not take goes into the detail payload |
+| References are validated | The executor could not validate referenced items | The function signature had no parameter to look them up | Every rule computable from the signature's inputs |
+| Lanes share one protocol type | One lane defined its own copy of a type from another lane's protocol | The type was left to the other lane | Cross-lane types defined in the contract wave |
+| The plan is internally consistent | The plan said "load eight items"; its own list had seven | No self-check of totals | Totals checked against itemized lists before handoff |
+
+Classifying each defect as a plan gap or an execution deviation decided where the fix belonged. Plan gaps went back into the plan and into this skill. Execution deviations went into a rework order (X-R1 … X-Rn, each with the problem, the required change down to the function and SQL condition, and the named test and assertion), which opened with red lines: build preconditions through the real flow, make one commit, and report red/green evidence for each item.
