@@ -4,6 +4,10 @@ All notable changes to this project are documented here.
 
 ## Unreleased
 
+- Required completeness assertions (row counts or key sets) alongside sampled golden values for extraction tasks, and whole-table assertions from reconciliations in the source document (totals, identities, cross-references), with totals read from the source and mirrored as runtime data-quality warnings.
+- Added rows for structural parsing rules that apply to every table and every occurrence in the source, and for a named invalid-input test per declared error type. Added a fixture-versus-real-output comparison for lanes that developed against hand-written fixtures, and an upstream-real-output probe.
+- Required reports that attribute failures to the baseline to include the same failure on the baseline commit with the same command and environment; the acceptor reproduces it first.
+
 - Extended `references/plan-self-check.md` with rows for source-set coverage in grounding validators, every exit of isolation and filtering rules with a control group, resume and retry semantics per intermediate state, round-trip fixtures that cover every contract value type, and model message sequences and input encoding. Added grounding variants and counterexamples for exemption rules.
 - Extended the cross-lane contract-wave rule to shared decision logic (validators, normalizers, formatters), and required traceability tests to assert at the exit where a rule takes effect.
 

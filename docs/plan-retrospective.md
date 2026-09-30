@@ -208,3 +208,18 @@ The execution-engine lane (planner, graph executor, model nodes, number groundin
 | One regulation-reference check | Two parallel lanes each implemented the same check with different normalization | Plan gap: shared decision logic was not assigned to the contract wave or to one owning lane |
 
 The acceptance observation that generalizes: a rule-to-test trace is not satisfied because a named test exists and passes. The isolation test asserted only the intermediate view, so the rule held where it was tested and failed where it mattered. Traces must name the exit at which each rule takes effect.
+
+## A parser lane: right values, missing rows
+
+The extraction lane (report parser, data-quality checks, pseudonymization) was largely sound. Thirty-seven golden values copied independently from the plan all matched. Every data item was present, contract round-trips were lossless, pseudonymization left no residue, and its real output drove the downstream golden chain end to end. The approach that worked for parsing was an explicit mapping table, golden samples, and item-by-item assertions against the source.
+
+The defects sat where golden samples do not reach, in completeness:
+
+| Requirement | Defect | Root cause | Better plan evidence |
+| --- | --- | --- | --- |
+| Monthly table is complete | The continuation page of a cross-page table had no header, and nine of thirty-six months were lost, including two months the source flagged as risky | Plan gap and execution deviation: the continuation rule was written for one section only, and only that section was implemented; each table item had a single sampled golden value | Completeness assertions (all 36 months, all 13 rows), the structural rule stated for every table with every occurrence listed, and reconciliation totals as whole-table assertions |
+| Columns are mapped correctly | In a multi-column table, "filed" was read as 0 and "difference" came from another column | Execution deviation in header interpretation; the source's own identity (due − filed = difference) was not used as an assertion | The identity asserted for every row, and mirrored as a runtime warning |
+| Invalid input fails with the declared error | Input in the wrong format or corrupted input raised the underlying library's exception | Plan gap: the declared error type had no named test | A named invalid-input test per declared error, asserting that library exceptions do not leak |
+| Hand-written fixtures agree with real output | A downstream lane's hand-written fixture held the correct value; the parser produced a wrong one; the two were never compared | Plan gap: no comparison step | A fixture-versus-real-output diff after the upstream merge and before downstream integration, with each difference attributed |
+
+One report was inaccurate. The executor ran the tests without the environment variables the plan required, got two failures, and reported them as existing baseline failures unrelated to the lane. Rerun with the planned command, the suite had zero failures. Reports that attribute a failure to the baseline must now include the same failure on the baseline commit, run with the same command and environment, and the acceptor reproduces it before accepting the claim.
