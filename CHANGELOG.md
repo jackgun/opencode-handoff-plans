@@ -4,6 +4,8 @@ All notable changes to this project are documented here.
 
 ## Unreleased
 
+## 0.8.0 — 2026-10-02
+
 - Extended `references/plan-self-check.md` with rows for host test doubles that reproduce the real signature and failure mode (auth failures never fall back to a default identity), transformation tests whose inputs contain something to transform, cross-stage persisted fields read back with non-empty values, one event per idempotency marker with a fail → resume → succeed test, rollback before failure writes with database-level error injection, reads by frozen version id, a test per signature parameter, deletion of shared content-addressed storage objects, display labels for internal values, per-entry source verification for reference data, field-level response tables between API and UI lanes, and the host's real build or type check for built artifacts.
 - Added self-checks that every placeholder or function a content card uses exists in the engine, that rules cited only by design section number carry their formula, and that golden values agree with the card's thresholds.
 - Added acceptor checks: compare named tests with actual test functions, search for assertions inside conditionals, swap host doubles for real-signature versions, and run the strictest host build. Added red lines for auth fallbacks, conditional assertions, and reference data filled from memory.
