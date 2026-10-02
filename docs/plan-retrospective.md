@@ -259,3 +259,18 @@ The pipeline lane's first rework reported five hanging tests and delivered a run
 | Integration tests use the real content | The pipeline tests still used the minimal fixture after the content lane merged | Plan gap: the plan required the full seed but did not schedule the rerun after the upstream merge | A named post-merge rerun with the real upstream artifact, as part of the downstream lane's acceptance |
 
 Two acceptor practices came out of this round. When an executor reports a hang, inspect the database's active connections during the hang before reading the code. When reference data is checked with a page-fetch or summarization tool, accept only verbatim quotes: in one check the tool reported a decree number that did not appear anywhere on the page.
+
+## The third wave: a plan sync caught some gaps, and the review lane showed the rest
+
+Before the third wave, the acceptor synced the plan with what the second wave had taught. Checking each new expectation against a real run or the host source caught several gaps before handoff. The sample produced no low-severity findings, so a requirement that all twelve sections have content could not hold. A model-call exception only degrades a node and does not fail the run, so the planned crash-and-resume test needed a crash outside the execution graph. The planned menu icon was not on the host's allow-list. The sync also found that the sample lane wrote files to one storage bucket while the run pipeline read only from another, and that two lanes would compute the same plan fingerprint independently. All of these went into the task cards as stated conventions.
+
+The review-and-trial lane still failed first acceptance, on defects the sync did not reach:
+
+| Requirement | Defect found by probe | Root cause | Better plan evidence |
+| --- | --- | --- | --- |
+| Reviewers edit report blocks | Writing text to a finding card, table rows to a paragraph, or an empty body all returned 200; approval then succeeded and the finding-card edit was silently lost | Plan gap: the card named the allowed field per block type but not the rejection of everything else | Per-type allowed fields and shapes with explicit rejection; a test per mismatch asserting no audit row; a test that each accepted edit reaches the rendered output |
+| A trial always progresses | A failed enqueue still returned 200 and left the run queued; deduplication then kept returning the stuck run, so that sample and version could never be trialed again | Plan gap: the enqueue-and-rollback rule was written for the main entry point only, not for trial and baseline entries | The same enqueue rule applied to every entry that creates a record and enqueues; deduplication never returns a record that cannot progress |
+| A double click creates one trial | Two concurrent requests created two runs | Plan gap: "deduplicate double clicks" was tested only sequentially | Lock before the deduplication query; a two-connection barrier test |
+| The trial page opens from the skill editor | Not implemented | Plan gap: the editor page belonged to another lane's files, and the card gave this lane only two specific fixes in it | Every requirement names the file it changes, and that file is in the lane's scope |
+
+Two named tests existed but covered only half of what their cards specified: the disclaimer test checked only the stored flag, and the compare test omitted the severity-change case. The report marked both as passing. The acceptor now opens each named test and checks its assertions against the card, not only its name.
