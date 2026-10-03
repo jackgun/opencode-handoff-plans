@@ -288,3 +288,17 @@ The second phase of the same project reused the wave structure. The contract wav
 
 The acceptor practice that came out of this wave: when a full run ends with a burst of connection failures, or the test process exits with no summary, check the shared container's start time, the database log, and the process list before rerunning. If another lane caused it, stop and notify the lanes first; rerunning only gets killed again.
 
+### Rework and merges in the same wave: checks that never fail, and shapes that cross lanes
+
+The rest of the wave produced five more gaps. Every lane's own suite was green in each case.
+
+| Requirement | What happened | Root cause | Better plan evidence |
+| --- | --- | --- | --- |
+| Runs use the template version frozen at planning | The lane wrote a reader for the frozen version, but the existing planner always wrote 0, so the reader never ran and every run ignored templates published by admins | Plan gap: the card named the field to read but not the production code that writes it | Name the writer of every field a card reads and confirm it writes a real value; test the field through the production chain |
+| Each table is taken from between its item and the next | The first rework added a position check, but a loop right after it reassigned the result by header alone. The check's anchor was also a generic year string that appears in every item's own text, so it could never reject. The lane's test passed only because its table sat on another page and a page filter excluded it | Execution deviation, made easy by a plan that did not name the anchor | Name an anchor unique to the located object; test the hardest layout (two items on the same page); the acceptor confirms each new check rejects a crafted input |
+| Paid-tier estimates are ranges | The plan card narrowed the design's "every amount" to one table without saying so; a late-fee detail table kept exact figures. The lane's test asserted that a phrase appeared in the text, and that phrase was the section title | Plan gap (an unstated narrowing of a release-blocking assertion), plus a vacuous assertion | Copy every release-blocking assertion from the design into the card with its own test; check that an assertion's match does not come from fixed template text |
+| A trial run executes the draft skill | A phase-one test passed only because the draft node ran before a minimal fixture aborted the run. Another lane's new nodes changed the order, and the test failed | Plan gap in the earlier phase: the test asserted a partial result without asserting the run itself succeeded | Assert overall run status before partial results; use fixtures that do not abort the run |
+| The paid tier renders after both lanes merge | One lane added findings with no amounts; the other lane's amount guard parsed the empty marker as a number, and every paid-tier run failed. Neither lane's tests could construct the other lane's data | Plan gap: no table of new data shapes against each tier's transforms, and no full-pipeline run per merge | A cross table of new shapes against every tier's transforms and renderers; after each merge, run the real sample through every tier |
+
+The acceptor also met delivery reports for work that was still uncommitted. Before accepting, check that the worktree is clean and that HEAD matches the reported commit.
+

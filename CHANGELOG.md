@@ -4,6 +4,9 @@ All notable changes to this project are documented here.
 
 ## Unreleased
 
+- Added rows to `references/plan-self-check.md` for fields written by existing code (name the production writer and confirm it is not a placeholder), new data shapes from one lane that pass through another lane's transforms (a cross table against every tier, run after each merge), and position-based extraction (an anchor unique to the located object, tested on the same-page layout). Added self-checks that release-blocking assertions in the design are copied into cards one by one, and that tests asserting partial results first assert the overall run status.
+- Added acceptor checks: confirm the worktree is clean and HEAD matches the reported commit before accepting, confirm each new check can actually reject an input (not satisfied by fixed template text or overwritten by later code), and run the real sample through every tier on each merge result. Added two items to the wave checklist.
+
 - Added rows to `references/plan-self-check.md` for records grouped by an external identity (reject a missing identity with zero side effects), host naming rules checked only at runtime (contract constants and a guard test over every declared identifier), and follow-on phases that extend lists locked by earlier equality tests (relaxed in the contract wave, restored by a named final-wave task). Added self-checks that follow-on plans scan existing tests and that parallel lanes have isolated test resources.
 - Added a test-isolation section to `references/parallel-waves.md`: one test database (or schema or directory) per lane plus one for the acceptor, created in the contract wave. Added a red line against restarting or stopping shared services and ending processes the lane did not start, an acceptor check to inspect containers and processes when acceptance runs are interrupted, and two checklist items.
 
