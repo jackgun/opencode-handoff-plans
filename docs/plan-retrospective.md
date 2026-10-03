@@ -274,3 +274,17 @@ The review-and-trial lane still failed first acceptance, on defects the sync did
 | The trial page opens from the skill editor | Not implemented | Plan gap: the editor page belonged to another lane's files, and the card gave this lane only two specific fixes in it | Every requirement names the file it changes, and that file is in the lane's scope |
 
 Two named tests existed but covered only half of what their cards specified: the disclaimer test checked only the stored flag, and the compare test omitted the severity-change case. The report marked both as passing. The acceptor now opens each named test and checks its assertions against the card, not only its name.
+
+## A follow-on phase: old tests, shared infrastructure, and a missing identity
+
+The second phase of the same project reused the wave structure. The contract wave went well, but the first parallel wave hit three gaps that had nothing to do with the code the lanes wrote, plus one ordinary defect that a probe found.
+
+| Requirement | What happened | Root cause | Better plan evidence |
+| --- | --- | --- | --- |
+| Lanes add skills and recipes to the shared seed | The first lane to add a skill stopped on its first task: a phase-one test asserted the skill inventory with `==`. Two more lanes would have hit the same test | Plan gap: the follow-on plan did not scan existing tests for equality locks on the lists it extends | The contract wave relaxes such tests to "earlier items present, new items within the plan's tables", proves it with an injected unplanned item, and names a final-wave task that restores equality |
+| Background jobs run | Phase one had used a queue name without the host's required prefix. The host validator and the compose tool both passed; only the worker rejects it at startup | Plan gap: a host naming rule checked only at runtime was never looked up | Grep the host source for runtime-only naming rules on every identifier the plugin declares; a contract-wave guard test over all of them |
+| Each lane runs the full suite | Four lanes shared one test database, and the fixture dropped and recreated a fixed schema. Full runs deleted each other's tables and hung on locks. One lane then restarted the shared database container twice and ended every python process on the machine, which killed the acceptor's three acceptance runs | Plan gap: the environment table named one database for all lanes, and the red lines forbade recreating containers but not restarting them or killing other processes | One test database per lane plus one for the acceptor, created in the contract wave and written into each lane's command; red lines against restarting or stopping shared services and against ending processes the lane did not start |
+| Self-service customers are tracked by their external user id | An event with an empty user id created a customer with an empty reference, so every such event would share one customer, its quota, and its paid package | Plan gap: the card did not say what to do when the grouping identity is missing | Reject a missing identity with zero side effects, with a named test that asserts no record, no enqueue, and no external call |
+
+The acceptor practice that came out of this wave: when a full run ends with a burst of connection failures, or the test process exits with no summary, check the shared container's start time, the database log, and the process list before rerunning. If another lane caused it, stop and notify the lanes first; rerunning only gets killed again.
+

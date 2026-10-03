@@ -4,6 +4,9 @@ All notable changes to this project are documented here.
 
 ## Unreleased
 
+- Added rows to `references/plan-self-check.md` for records grouped by an external identity (reject a missing identity with zero side effects), host naming rules checked only at runtime (contract constants and a guard test over every declared identifier), and follow-on phases that extend lists locked by earlier equality tests (relaxed in the contract wave, restored by a named final-wave task). Added self-checks that follow-on plans scan existing tests and that parallel lanes have isolated test resources.
+- Added a test-isolation section to `references/parallel-waves.md`: one test database (or schema or directory) per lane plus one for the acceptor, created in the contract wave. Added a red line against restarting or stopping shared services and ending processes the lane did not start, an acceptor check to inspect containers and processes when acceptance runs are interrupted, and two checklist items.
+
 ## 0.8.0 — 2026-10-02
 
 - Extended `references/plan-self-check.md` with rows for host test doubles that reproduce the real signature and failure mode (auth failures never fall back to a default identity), transformation tests whose inputs contain something to transform, cross-stage persisted fields read back with non-empty values, one event per idempotency marker with a fail → resume → succeed test, rollback before failure writes with database-level error injection, reads by frozen version id, a test per signature parameter, deletion of shared content-addressed storage objects, display labels for internal values, per-entry source verification for reference data, field-level response tables between API and UI lanes, and the host's real build or type check for built artifacts.
