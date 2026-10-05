@@ -4,6 +4,9 @@ All notable changes to this project are documented here.
 
 ## Unreleased
 
+- Added rows to `references/plan-self-check.md` for user-facing text the plan fixes (literal-value tests; changes reported as deviations), reference data with effective dates (checked per applicable year), side effects after the main transaction commits (their own failure exit for every preceding step), failure-recording rows that must satisfy table constraints, and call sites in another lane's file. Added a self-check that global constraints and card examples agree.
+- Added acceptor checks: run the host's real build after resolving merge conflicts, and spell out the temporary-file procedure for read-only repositories in the handoff. Added two items to the wave checklist.
+
 - Added rows to `references/plan-self-check.md` for fields written by existing code (name the production writer and confirm it is not a placeholder), new data shapes from one lane that pass through another lane's transforms (a cross table against every tier, run after each merge), and position-based extraction (an anchor unique to the located object, tested on the same-page layout). Added self-checks that release-blocking assertions in the design are copied into cards one by one, and that tests asserting partial results first assert the overall run status.
 - Added acceptor checks: confirm the worktree is clean and HEAD matches the reported commit before accepting, confirm each new check can actually reject an input (not satisfied by fixed template text or overwritten by later code), and run the real sample through every tier on each merge result. Added two items to the wave checklist.
 

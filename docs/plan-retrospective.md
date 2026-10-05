@@ -302,3 +302,18 @@ The rest of the wave produced five more gaps. Every lane's own suite was green i
 
 The acceptor also met delivery reports for work that was still uncommitted. Before accepting, check that the worktree is clean and that HEAD matches the reported commit.
 
+### The second wave of the follow-on phase: text drift, dates, and side effects after commit
+
+Each lane's own suite was green again. The gaps came from what the named tests did not pin down and from code that runs after the main transaction.
+
+| Requirement | What happened | Root cause | Better plan evidence |
+| --- | --- | --- | --- |
+| Finding titles follow the plan's table | A content lane rewrote 15 of 17 titles to mirror the source report's item names and dropped the direction the plan's titles carried ("basis too low" became "comparison differs"). The report listed no deviation | Plan gap: the named tests checked formulas, values, formats, and terms, but not titles; also an unreported deviation | A literal-value test for every user-facing text the plan fixes; reports list every self-decided difference |
+| Cited regulations are valid for the finding's years | The plan assigned a law effective mid-2022 to findings for 2020 and 2021. The lane caught it because its card required a per-year validity test | Plan gap: the author checked that IDs exist, not their effective dates | Check reference-data effective dates per applicable year when writing the table |
+| Paid tiers never contradict the global constraint | The global constraint said "no hand-written numbers in explanations", while the card's own example quoted "over 50%". A lane followed the example | Plan gap: a constraint and an example contradicted each other | Run every example through the global constraints; write the exceptions into the constraint |
+| A failed delivery hands the run to a person | Delivery runs after the main transaction commits. A failed PDF read raised out of the pipeline; the run said "done", the customer state stayed "pending", and nobody was told. The rework then wrote rejection rows that broke a foreign key and a unique key | Plan gap: the card named one failure (the host call raising) and not the steps before it, and said nothing about the rejection row's own constraints | A failure exit for every post-commit side effect; failure-recording rows that satisfy table constraints, tested twice in a row |
+| Approving a reviewed report delivers it | The card said "call delivery after approval, inside the route", but the route file belonged to no lane. The lane tested by chaining the two functions by hand | Plan gap, repeated from the first phase: a requirement placed in a file outside the lane | Put the call site's file in the lane's scope; test through the call site |
+| Two lanes' admin pages build together | Both lanes appended to the same UI files. The acceptor kept both sides of the conflict, but a shared closing brace outside the conflict block moved, and only the real build failed; the structural validator passed | Acceptor-side: conflict resolution not followed by a real build | Run the host's real build on every merge that resolved a conflict |
+
+One lane also reported the front-end checks as blocked because the framework repository is read-only, although the handoff allowed a temporary manifest. The handoff should spell out the temporary-file procedure and its cleanup command, not only the read-only rule.
+
