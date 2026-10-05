@@ -4,6 +4,9 @@ All notable changes to this project are documented here.
 
 ## Unreleased
 
+- Added a self-check that every clause of a final-wave acceptance card becomes its own assertion: compound cells split into one line per clause, counts asserted per key, and states asserted as absolute values rather than "one more than before".
+- Added an acceptor check and a wave-checklist item: cleanup of build directories outside a read-only repository is proven by the directory not existing, not by an empty `git status`; the handoff gives the Windows long-path delete command.
+
 - Added rows to `references/plan-self-check.md` for user-facing text the plan fixes (literal-value tests; changes reported as deviations), reference data with effective dates (checked per applicable year), side effects after the main transaction commits (their own failure exit for every preceding step), failure-recording rows that must satisfy table constraints, and call sites in another lane's file. Added a self-check that global constraints and card examples agree.
 - Added acceptor checks: run the host's real build after resolving merge conflicts, and spell out the temporary-file procedure for read-only repositories in the handoff. Added two items to the wave checklist.
 

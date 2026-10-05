@@ -317,3 +317,13 @@ Each lane's own suite was green again. The gaps came from what the named tests d
 
 One lane also reported the front-end checks as blocked because the framework repository is read-only, although the handoff allowed a temporary manifest. The handoff should spell out the temporary-file procedure and its cleanup command, not only the read-only rule.
 
+### The final wave of the follow-on phase: compound acceptance cells and leftover directories
+
+The final lane wrote end-to-end tests only; the product behavior was already right, and the acceptor's probes confirmed every property. The gaps were in what the tests asserted.
+
+| Requirement | What happened | Root cause | Better plan evidence |
+| --- | --- | --- | --- |
+| The sample covers every item, and the paid tier's "other items" section shows the fixed sentence | The test checked coverage and dropped the second clause | Plan gap: two requirements in one table cell | One assertion line per clause in the card |
+| Each computed skill produces exactly one finding | The test compared sets, so a skill producing two findings would pass | Plan gap: a count phrase that reads naturally as set equality | Write counts as per-key counts in the card |
+| Declining a failed delivery returns the reserved use | The test asserted "one more than before" without pinning "before", so a wrong reservation count would pass | Plan gap: the card did not give absolute states | Give the absolute value before and after each state change |
+| Temporary compose output is removed | The lane reported a leftover directory it "could not delete because of path length" as clean, because the read-only repository's `git status` was empty (the directory is git-ignored) | Plan gap: the handoff named `git status` as the cleanup evidence | Prove cleanup by the directory not existing; give the long-path delete command |
