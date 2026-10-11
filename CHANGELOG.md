@@ -4,6 +4,9 @@ All notable changes to this project are documented here.
 
 ## Unreleased
 
+- Extended the locked-list rule in `references/plan-self-check.md` to single-lane tasks: before a task adds an item to a registry, enum or list, search the tests for equality or fixed-count assertions on it, put the locking test file in the task's scope, and give the full expected value after the addition (still an equality assertion). Self-check 17 now covers both follow-on phases and single-lane additions.
+- Added a row and self-check 23: every field change a card asserts for a state transition (counter increments, cleared fields, versions, rounds) cites the code line that writes it, separates what the transition writes from what later steps write, fixes the configuration mode in the precondition with one set of expectations per mode, and asserts only the guaranteed relation for fields a later step rewrites.
+
 ## 0.9.0 — 2026-10-05
 
 - Added a self-check that every clause of a final-wave acceptance card becomes its own assertion: compound cells split into one line per clause, counts asserted per key, and states asserted as absolute values rather than "one more than before".
