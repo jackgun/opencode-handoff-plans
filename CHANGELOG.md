@@ -6,6 +6,7 @@ All notable changes to this project are documented here.
 
 - Extended the locked-list rule in `references/plan-self-check.md` to single-lane tasks: before a task adds an item to a registry, enum or list, search the tests for equality or fixed-count assertions on it, put the locking test file in the task's scope, and give the full expected value after the addition (still an equality assertion). Self-check 17 now covers both follow-on phases and single-lane additions.
 - Added a row and self-check 23: every field change a card asserts for a state transition (counter increments, cleared fields, versions, rounds) cites the code line that writes it, separates what the transition writes from what later steps write, fixes the configuration mode in the precondition with one set of expectations per mode, and asserts only the guaranteed relation for fields a later step rewrites.
+- Added a row and self-check 24: when a card fixes user-facing text that an inner function returns, trace the call chain to the outward entry point and write the expected value as the user finally receives it (prefixes, wrappers, truncation included), with test data that makes any data-dependent prefix non-empty and a check that the assembled text reads naturally.
 
 ## 0.9.0 — 2026-10-05
 
