@@ -4,6 +4,8 @@ All notable changes to this project are documented here.
 
 ## Unreleased
 
+## 0.10.0 — 2026-10-21
+
 - Added self-check 27 and an acceptor check: every must/must-not in implementation and repair paragraphs maps to an assertion that fails for the cheapest wrong implementation, or is marked advisory. The task-card hint item in `SKILL.md` and the task templates now say the same.
 - Added self-check 28 and a golden-value rule: literal expectations for every promised output dimension (overall, each group, each sheet), not only overall metrics. Self-check 9 now also covers field lists, group metric sets and display labels cited only by design section, with a search for such references before handoff.
 - Added a section to `references/delivery-evidence.md` on frozen end-to-end acceptance tests for dense outputs (literal expectations only, red on the baseline for the missing feature, adversarial probes kept by the acceptor) and on a fact-layer checkpoint in long serial plans, which also applies when an environment blocker pushes fact loading behind downstream work. Added a retrospective subsection with the observed baseline.
