@@ -12,7 +12,7 @@ For changes to the skill:
 4. Run the skill validator before opening a pull request.
 
 ```powershell
-python "$env:CODEX_HOME/skills/.system/skill-creator/scripts/quick_validate.py" skills/opencode-handoff-plans
+python -X utf8 "$env:CODEX_HOME/skills/.system/skill-creator/scripts/quick_validate.py" skills/opencode-handoff-plans
 ```
 
 The maintainer may request that examples are generalized or that project names, customer data, credentials, and internal URLs are removed.
