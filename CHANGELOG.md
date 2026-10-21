@@ -4,6 +4,10 @@ All notable changes to this project are documented here.
 
 ## Unreleased
 
+- Added self-check 27 and an acceptor check: every must/must-not in implementation and repair paragraphs maps to an assertion that fails for the cheapest wrong implementation, or is marked advisory. The task-card hint item in `SKILL.md` and the task templates now say the same.
+- Added self-check 28 and a golden-value rule: literal expectations for every promised output dimension (overall, each group, each sheet), not only overall metrics. Self-check 9 now also covers field lists, group metric sets and display labels cited only by design section, with a search for such references before handoff.
+- Added a section to `references/delivery-evidence.md` on frozen end-to-end acceptance tests for dense outputs (literal expectations only, red on the baseline for the missing feature, adversarial probes kept by the acceptor) and on a fact-layer checkpoint in long serial plans, which also applies when an environment blocker pushes fact loading behind downstream work. Added a retrospective subsection with the observed baseline.
+
 - Added `references/delivery-evidence.md` and task-card evidence slots for field lifecycles, source namespaces, a minimal real workflow, preserved test logic, final-output assertions, and per-clause rework closure. Compacted the skill entrypoint's scenario catalog into reference routing rather than adding another long checklist.
 - Strengthened existing self-checks for unknown propagation into groups, valid/excluded samples, identifier-preserving text protection, real phase-internal budget checks, and claims matched to the delivered revision's actual test results. Import failures and mocked-away stages are no longer sufficient evidence for those business claims.
 - Distinguished incorrect plan facts, execution omissions, repair regressions, review gaps and genuinely new requirements; removed the assumption that tidy scoped code implies a plan gap. Environment handoffs now state readiness and preparation ownership before affected tasks start, and rework commit granularity follows the approved workflow.
