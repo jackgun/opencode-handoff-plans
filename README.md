@@ -8,6 +8,7 @@ Source-available agent skill and reusable templates for planning, handing off, a
 - `skills/opencode-handoff-plans/references/exact-handoff.md` — exact-execution plans, reproducible patch steps, environment boundaries, red lines, and deviation reports.
 - `skills/opencode-handoff-plans/references/parallel-waves.md` — multi-lane, multi-wave plans: contract waves, plan sync before dispatch, handoff skeleton, and guard tests.
 - `skills/opencode-handoff-plans/references/plan-self-check.md` — deriving high-risk scenarios from each rule, plan self-checks, probe acceptance, and rework orders.
+- `skills/opencode-handoff-plans/references/rework-control.md` — closable clause lists, public regressions for known defects, failure-family cases for shared repairs, and what to change when the same invariant is missed again.
 - `skills/opencode-handoff-plans/references/delivery-evidence.md` — verifying field lifecycles and source semantics, selecting a real workflow sample, and closing each acceptance claim with observable evidence.
 - `skills/opencode-handoff-plans/agents/openai.yaml` — optional display metadata for Codex.
 - `docs/plan-retrospective.md` — lessons from a real multi-agent delivery and acceptance cycle.
