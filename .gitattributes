@@ -1,0 +1,44 @@
+# 换行统一：文本文件在仓库里存 LF，检出也用 LF（不受各人 core.autocrlf 影响）。
+# text=auto：由 Git 判断是否文本；仓库里已经是 CRLF 的旧文件保持原样，不会凭空出现改动。
+* text=auto eol=lf
+
+# Windows 批处理必须是 CRLF
+*.bat text eol=crlf
+*.cmd text eol=crlf
+
+# 二进制文件：不转换换行，不做文本 diff
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.webp binary
+*.ico binary
+*.bmp binary
+*.pdf binary
+*.doc binary
+*.docx binary
+*.xls binary
+*.xlsx binary
+*.ppt binary
+*.pptx binary
+*.zip binary
+*.gz binary
+*.tgz binary
+*.tar binary
+*.7z binary
+*.rar binary
+*.jar binary
+*.mmap binary
+*.ttf binary
+*.otf binary
+*.woff binary
+*.woff2 binary
+*.eot binary
+*.mp3 binary
+*.mp4 binary
+*.wav binary
+*.webm binary
+*.db binary
+*.sqlite binary
+*.exe binary
+*.dll binary
