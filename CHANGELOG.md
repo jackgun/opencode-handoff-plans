@@ -4,6 +4,9 @@ All notable changes to this project are documented here.
 
 ## Unreleased
 
+- Added task-card closure fields that separate implementation from verification, identify the independent checker and downstream release, and map required artifacts to actual command collection. An unimplemented consumer stays with the implementer; a smaller passing suite does not close a missing required check.
+- Added same-input cross-layer examples and lifecycle counterexamples for new-record eligibility and transaction/request credentials. Strengthened the existing stage checkpoint and concurrency evidence guidance without requiring human approval for every task or lock-wait tests for uniqueness-only contracts.
+
 ## 0.11.0 — 2026-10-25
 
 - Added `references/rework-control.md` for cross-module or already-reworked handoffs: a short list of closable clauses with stable IDs, three kinds of evidence (frozen literal samples, public regressions for known defects, unpublished acceptor variants), representative entry × stage × exit cases per failure family, allowed results written before implementation hints, two light gates (author before handoff, executor before claiming done), and fixing the handoff method when the same invariant is missed again. `SKILL.md` routes to it first and replaces the long re-check sentence with a pointer to the existing probe checklist.
