@@ -4,6 +4,8 @@ All notable changes to this project are documented here.
 
 ## Unreleased
 
+- Added a source-verified coverage inventory for universal/shared contracts, with branch applicability, bypasses, ownership and exit assertions in the task card. Authors reconcile discovered paths before handoff; implementers report per branch; independent checkers re-enumerate paths rather than only rerunning public examples. Added pre-consumer persistence checks and explicit historical-payload fixtures; isolated small edits remain outside this workflow.
+
 - Added task-card closure fields that separate implementation from verification, identify the independent checker and downstream release, and map required artifacts to actual command collection. An unimplemented consumer stays with the implementer; a smaller passing suite does not close a missing required check.
 - Added same-input cross-layer examples and lifecycle counterexamples for new-record eligibility and transaction/request credentials. Strengthened the existing stage checkpoint and concurrency evidence guidance without requiring human approval for every task or lock-wait tests for uniqueness-only contracts.
 
