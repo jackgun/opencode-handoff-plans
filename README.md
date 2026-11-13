@@ -12,6 +12,7 @@ Source-available agent skill and reusable templates for planning, handing off, a
 - `skills/opencode-handoff-plans/references/delivery-evidence.md` — verifying field lifecycles and source semantics, selecting a real workflow sample, and closing each acceptance claim with observable evidence.
 - `skills/opencode-handoff-plans/agents/openai.yaml` — optional display metadata for Codex.
 - `docs/plan-retrospective.md` — lessons from a real multi-agent delivery and acceptance cycle.
+- `docs/multilingual-handoff-retrospective.md` — separating planning gaps from execution omissions, with non-default vertical slices, cache/callback checks, two rework rounds on overlapping reads and writes, and candidate/evidence boundaries.
 - `docs/task-template.md` — compact task and verification template.
 
 The skill helps a team trace each important rule from its specification through ownership, production wiring, acceptance scenarios, and evidence. It is intended for complex delivery such as state machines, persistence, external integrations, and parallel work. It is not a substitute for directly fixing a small, local issue.

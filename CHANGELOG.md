@@ -4,6 +4,12 @@ All notable changes to this project are documented here.
 
 ## Unreleased
 
+## 0.12.0 — 2026-11-13
+
+- Added the two rework rounds to the multilingual retrospective and a worked read/write timing example: distinguish snapshot acquisition, business commit and response delivery; assert current context, preserved view state and successful business results together. Task/self-check slots reference the example; repeat acceptance distinguishes a changed candidate from rechecking unchanged evidence.
+
+- Recorded a multilingual-migration handoff retrospective and tightened existing task-card gates: one non-default real-entry slice before bulk work; context propagation through projections, callbacks and caches; displayed-command round trips; explicit partial-candidate ownership; candidate-bound evidence and shared writable test-resource isolation. These checks apply to affected migrations, not every local edit.
+
 - Added a source-verified coverage inventory for universal/shared contracts, with branch applicability, bypasses, ownership and exit assertions in the task card. Authors reconcile discovered paths before handoff; implementers report per branch; independent checkers re-enumerate paths rather than only rerunning public examples. Added pre-consumer persistence checks and explicit historical-payload fixtures; isolated small edits remain outside this workflow.
 
 - Added task-card closure fields that separate implementation from verification, identify the independent checker and downstream release, and map required artifacts to actual command collection. An unimplemented consumer stays with the implementer; a smaller passing suite does not close a missing required check.
